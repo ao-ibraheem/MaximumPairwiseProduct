@@ -1,23 +1,17 @@
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class MaximumPairwiseProduct {
 
-    public BigInteger getMaxPairProduct(ArrayList<BigInteger> numbers, int arraySize){
-        int i = 2;
-        BigInteger product,n1,n2;
-
-        n1 = Collections.max(numbers,null);
-       // System.out.println(numbers);
-        while(Collections.max(numbers,null)==n1){
-            numbers.remove(n1);
-        }
-       //System.out.println(numbers);
-
-        n2 = Collections.max(numbers,null);
-        product = n1.multiply(n2);
+    public BigInteger getMaxPairProduct(ArrayList<BigInteger> numbers){
+        BigInteger product;
+        Set<BigInteger> set = new LinkedHashSet<BigInteger>();
+        set.addAll(numbers);
+        numbers.clear();
+        numbers.addAll(set);
+        Collections.sort(numbers);
+        System.out.println(numbers);
+        product = numbers.get(numbers.size()- 1).multiply(numbers.get(numbers.size() - 2));
         return product;
     }
 
@@ -35,7 +29,7 @@ public class MaximumPairwiseProduct {
         sc.close();
 
         if(n>1){
-            product = mpp.getMaxPairProduct(sequence,n);
+            product = mpp.getMaxPairProduct(sequence);
             System.out.println(product);
         }
 
